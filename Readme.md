@@ -1,4 +1,4 @@
-### Fivem Street Begging Script Made By Kael Scripts
+### Fivem Street Begging Made By Kael Scripts
 
 ## Dependencies
 - [qb-core](https://github.com/qbcore-framework/qb-core)
