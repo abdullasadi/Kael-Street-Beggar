@@ -1,4 +1,4 @@
-### Fivem beggar Script Made By Kael Team
+### Fivem Street Begging Script Made By Kael Scripts
 
 ## Dependencies
 - [qb-core](https://github.com/qbcore-framework/qb-core)
@@ -29,7 +29,7 @@ Add the item images to your inventory script
 - [Discord](https://discord.gg/JwWANh8EY5)
 - [Tebex](https://kael.tebex.io/)
 
-## More Scripts From Kael Team
+## More Scripts From Kael Scripts
 - [Illegal Cargo Delivery](https://kael.tebex.io/package/5642002)
 - [Pearls Job](https://kael.tebex.io/package/5672502)
 - [Fivem Crypto Mining](https://kael.tebex.io/package/5547351)
