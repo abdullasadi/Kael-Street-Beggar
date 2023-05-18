@@ -231,50 +231,52 @@ end)
 
 function CallNpcAudiance()
     while true do 
-        local PlayerPed = PlayerPedId()
-        local PlayerCoords = GetEntityCoords(PlayerPed)
-        local BoxCoords = GetEntityCoords(BeggingBoxProp)
-        local IgnoredPeds = {}
-        if next(IgnoredPeds) == nil then
-            for _, player in ipairs(GetActivePlayers()) do
-                local ped = GetPlayerPed(player)
-                IgnoredPeds[#IgnoredPeds+1] = ped
+        if BeggingStarted then 
+            local PlayerPed = PlayerPedId()
+            local PlayerCoords = GetEntityCoords(PlayerPed)
+            local BoxCoords = GetEntityCoords(BeggingBoxProp)
+            local IgnoredPeds = {}
+            if next(IgnoredPeds) == nil then
+                for _, player in ipairs(GetActivePlayers()) do
+                    local ped = GetPlayerPed(player)
+                    IgnoredPeds[#IgnoredPeds+1] = ped
+                end
             end
-        end
-        local NPCAudPed, NPCDistence = QBCore.Functions.GetClosestPed(BoxCoords, IgnoredPeds)
+            local NPCAudPed, NPCDistence = QBCore.Functions.GetClosestPed(BoxCoords, IgnoredPeds)
 
-        if NPCDistence < 15 then
-            TaskGoToCoordAnyMeans(NPCAudPed, BoxCoords, 1.0, 0, false, 1, 0.0)
-            repeat 
-                Wait(10)
-            until (IsEntityAtCoord(NPCAudPed, BoxCoords, 1.0, 1.0, 1.0, false, false, 0))            
-            ClearPedTasks(NPCAudPed)
-            SetEntityAsMissionEntity(NPCAudPed, true, true)
-            SetBlockingOfNonTemporaryEvents(NPCAudPed, true)
-            TaskLookAtEntity(NPCAudPed, PlayerPed, 5500.0, 2048, 3)
-            TaskTurnPedToFaceEntity(NPCAudPed, BeggingBoxProp, 5500)
-            Wait(3000)
-            LoadAnimDict("amb@world_human_cheering@male_a")
-            TaskPlayAnim(NPCAudPed, "amb@world_human_cheering@male_a", "base", 5.0, -1, -1, 51, 0, false, false, false)
-            Wait(5000)
+            if NPCDistence < 15 then
+                TaskGoToCoordAnyMeans(NPCAudPed, BoxCoords, 1.0, 0, false, 1, 0.0)
+                repeat 
+                    Wait(10)
+                until (IsEntityAtCoord(NPCAudPed, BoxCoords, 1.0, 1.0, 1.0, false, false, 0))            
+                ClearPedTasks(NPCAudPed)
+                SetEntityAsMissionEntity(NPCAudPed, true, true)
+                SetBlockingOfNonTemporaryEvents(NPCAudPed, true)
+                TaskLookAtEntity(NPCAudPed, PlayerPed, 5500.0, 2048, 3)
+                TaskTurnPedToFaceEntity(NPCAudPed, BeggingBoxProp, 5500)
+                Wait(3000)
+                LoadAnimDict("amb@world_human_cheering@male_a")
+                TaskPlayAnim(NPCAudPed, "amb@world_human_cheering@male_a", "base", 5.0, -1, -1, 51, 0, false, false, false)
+                Wait(5000)
 
-            ClearPedTasks(NPCAudPed)
-            local MomeyModel = "p_banknote_onedollar_s"
-            LoadModel(MomeyModel)
-            local MoneyProp = CreateObject(GetHashKey(MomeyModel), GetEntityCoords(NPCAudPed), false, true, false)
-            AttachEntityToEntity(MoneyProp, NPCAudPed, GetPedBoneIndex(NPCAudPed, 6286), 0.13, 0.0, 0.0, 0.0, 0.0, 90.0, 20.0, true, true, false, true, 1, true)
+                ClearPedTasks(NPCAudPed)
+                local MomeyModel = "p_banknote_onedollar_s"
+                LoadModel(MomeyModel)
+                local MoneyProp = CreateObject(GetHashKey(MomeyModel), GetEntityCoords(NPCAudPed), false, true, false)
+                AttachEntityToEntity(MoneyProp, NPCAudPed, GetPedBoneIndex(NPCAudPed, 6286), 0.13, 0.0, 0.0, 0.0, 0.0, 90.0, 20.0, true, true, false, true, 1, true)
 
-            LoadAnimDict("random@domestic")
-            TaskPlayAnim(NPCAudPed, "random@domestic", "pickup_low", 5.0, -1, -1, 50, 0, false, false, false)
-            TriggerServerEvent("kael-beggar:server:giverewardmoney")
-            Wait(1000)
-            DeleteEntity(MoneyProp)
+                LoadAnimDict("random@domestic")
+                TaskPlayAnim(NPCAudPed, "random@domestic", "pickup_low", 5.0, -1, -1, 50, 0, false, false, false)
+                TriggerServerEvent("kael-beggar:server:giverewardmoney")
+                Wait(1000)
+                DeleteEntity(MoneyProp)
 
-            Wait(2000)
-            ClearPedTasks(NPCAudPed)
-            SetEntityAsMissionEntity(NPCAudPed, false, false)
-            SetEntityAsNoLongerNeeded(NPCAudPed)
-        end
+                Wait(2000)
+                ClearPedTasks(NPCAudPed)
+                SetEntityAsMissionEntity(NPCAudPed, false, false)
+                SetEntityAsNoLongerNeeded(NPCAudPed)
+            end
+        end        
         Wait(20000)
     end
 end
