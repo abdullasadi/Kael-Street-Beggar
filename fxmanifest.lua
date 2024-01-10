@@ -3,7 +3,7 @@ lua54 'yes'
 games { 'gta5' }
 author 'Kael Scripts'
 description 'A NPC Begging Script Made By Kael Scripts Team'
-version '1.0.0'
+version '1.0.1'
 
 client_scripts {
     'client/**.lua',

@@ -8,6 +8,7 @@ local BossBlip = nil
 local JobStarted = false
 local BoxSpawned = false
 local BeggingStarted = false
+local LastCustomer = nil
 
 CreateThread(function()
     while true do 
@@ -244,7 +245,8 @@ function CallNpcAudiance()
             end
             local NPCAudPed, NPCDistence = QBCore.Functions.GetClosestPed(BoxCoords, IgnoredPeds)
 
-            if NPCDistence < 15 then
+            if NPCDistence < 15 and LastCustomer ~= NPCAudPed then
+                LastCustomer = NPCAudPed
                 TaskGoToCoordAnyMeans(NPCAudPed, BoxCoords, 1.0, 0, false, 1, 0.0)
                 repeat 
                     Wait(10)

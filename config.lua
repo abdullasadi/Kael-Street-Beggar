@@ -8,6 +8,6 @@ Config = {
     BeggingBoxModel = 'v_ind_cs_box01',
     BoxPrice = 100,
     GuitarPrice = 150,
-    RewardMin = 10,
-    RewardMax = 80,
+    RewardMin = 30,
+    RewardMax = 50,
 }
